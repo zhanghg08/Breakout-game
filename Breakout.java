@@ -32,10 +32,10 @@ public class Breakout extends GraphicsProgram {
 	private static final int PADDLE_Y_OFFSET = 30;
 
 /** Number of bricks per row */
-	private static final int NBRICKS_PER_ROW = 3;
+	private static final int NBRICKS_PER_ROW = 10;
 
 /** Number of rows of bricks */
-	private static final int NBRICK_ROWS = 3;
+	private static final int NBRICK_ROWS = 10;
 
 /** Separation between bricks */
 	private static final int BRICK_SEP = 4;
@@ -217,6 +217,7 @@ public class Breakout extends GraphicsProgram {
 		GObject collider;		//Collision point
 		collider = getCollidingObject();
 		if (collider != null) {
+			bounceClip.play();
 			if (collider == paddle) {
 				vy = -vy;
 				double diff = ball.getY() + 2 * BALL_RADIUS - paddle.getY();
@@ -259,7 +260,10 @@ public class Breakout extends GraphicsProgram {
 	private double lastX;		/* mouse last x position*/
 	private boolean gameOver = false;		/* gameover flag*/
 	private int turnLeft = NTURNS;		/* how many turn left*/
-	private int brickLeft = NBRICKS_PER_ROW * NBRICK_ROWS;
+	private int brickLeft = NBRICKS_PER_ROW * NBRICK_ROWS;		/* total bricks left*/
+	private AudioClip bounceClip = MediaTools.loadAudioClip("bounce.au");		/* sound*/
+	private GLabel labelTurnLeft;		/* label shows turnLeft*/
+	private GLabel labelBrickLeft;		/* label shows bricks left*/
 	//private GRect brick;
 
 }
